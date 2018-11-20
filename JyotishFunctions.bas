@@ -1,4 +1,4 @@
-Attribute VB_Name = "JyotishFunctions"
+Attribute VB_Name = "Module1"
 '
 ' Swiss Ephemeris Release 1.60  9-jan-2000
 '
@@ -1149,7 +1149,7 @@ On Error GoTo error_msg
 Exit Function
 error_msg:
     
-    Debug.Print Err & ": " & Error(Err)
+     Application.StatusBar = Err & ": " & Error(Err)
 
 End Function
 Public Function Sunset( _
