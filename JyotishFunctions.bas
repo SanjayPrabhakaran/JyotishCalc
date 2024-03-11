@@ -1,4 +1,4 @@
-Attribute VB_Name = "Module1"
+Attribute VB_Name = "JyotishFunctions"
 '
 ' Swiss Ephemeris Release 1.60  9-jan-2000
 '
@@ -7,8 +7,8 @@ Attribute VB_Name = "Module1"
 ' directory where it can be found at runtime
 '
 
-Private Declare Function swe_azalt Lib ".\swedll32.dll" _
-        Alias "_swe_azalt@40" ( _
+Private Declare PtrSafe Function swe_azalt Lib "swedll64.dll" _
+        ( _
           ByVal tjd_ut As Double, _
           ByVal calc_flag As Long, _
           ByRef geopos As Double, _
@@ -20,8 +20,8 @@ Private Declare Function swe_azalt Lib ".\swedll32.dll" _
                    'xin must be the first of two array elements
                    'xaz must be the first of three array elements
 
-Private Declare Function swe_azalt_rev Lib ".\swedll32.dll" _
-        Alias "_swe_azalt_rev@24" ( _
+Private Declare PtrSafe Function swe_azalt_rev Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal calc_flag As Long, _
           ByRef geopos As Double, _
@@ -31,8 +31,8 @@ Private Declare Function swe_azalt_rev Lib ".\swedll32.dll" _
                    'xin must be the first of two array elements
                    'xout must be the first of three array elements
 
-Private Declare Function swe_calc Lib ".\swedll32.dll" _
-        Alias "_swe_calc@24" ( _
+Private Declare PtrSafe Function swe_calc Lib "swedll64.dll" _
+       ( _
           ByVal tjd As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -41,8 +41,8 @@ Private Declare Function swe_calc Lib ".\swedll32.dll" _
         ) As Long   ' x must be first of six array elements
                     ' serr must be able to hold 256 bytes
 
-Private Declare Function swe_calc_d Lib ".\swedll32.dll" _
-        Alias "_swe_calc_d@20" ( _
+Private Declare PtrSafe Function swe_calc_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -51,8 +51,8 @@ Private Declare Function swe_calc_d Lib ".\swedll32.dll" _
         ) As Long       ' x must be first of six array elements
                         ' serr must be able to hold 256 bytes
 
-Private Declare Function swe_calc_ut Lib ".\swedll32.dll" _
-        Alias "_swe_calc_ut@24" ( _
+Private Declare PtrSafe Function swe_calc_ut Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -61,8 +61,8 @@ Private Declare Function swe_calc_ut Lib ".\swedll32.dll" _
         ) As Long   ' x must be first of six array elements
                     ' serr must be able to hold 256 bytes
 
-Private Declare Function swe_calc_ut_d Lib ".\swedll32.dll" _
-        Alias "_swe_calc_ut_d@20" ( _
+Private Declare PtrSafe Function swe_calc_ut_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -71,117 +71,117 @@ Private Declare Function swe_calc_ut_d Lib ".\swedll32.dll" _
         ) As Long       ' x must be first of six array elements
                         ' serr must be able to hold 256 bytes
 
-Private Declare Function swe_close Lib ".\swedll32.dll" _
-        Alias "_swe_close@0" ( _
+Private Declare PtrSafe Function swe_close Lib "swedll64.dll" _
+       ( _
         ) As Long
 
-Private Declare Function swe_close_d Lib ".\swedll32.dll" _
-        Alias "_swe_close_d@4" ( _
+Private Declare PtrSafe Function swe_close_d Lib "swedll64.dll" _
+       ( _
           ByVal ivoid As Long _
         ) As Long       ' argument ivoid is ignored
 
-Private Declare Sub swe_cotrans Lib ".\swedll32.dll" _
-        Alias "_swe_cotrans@16" ( _
+Private Declare PtrSafe Sub swe_cotrans Lib "swedll64.dll" _
+       ( _
           ByRef xpo As Double, _
           ByRef xpn As Double, _
           ByVal eps As Double _
         )
 
-Private Declare Function swe_cotrans_d Lib ".\swedll32.dll" _
-        Alias "_swe_cotrans_d@12" ( _
+Private Declare PtrSafe Function swe_cotrans_d Lib "swedll64.dll" _
+       ( _
           ByRef xpo As Double, _
           ByRef xpn As Double, _
           ByRef eps As Double _
         ) As Long
 
-Private Declare Sub swe_cotrans_sp Lib ".\swedll32.dll" _
-        Alias "_swe_cotrans_sp@16" ( _
+Private Declare PtrSafe Sub swe_cotrans_sp Lib "swedll64.dll" _
+       ( _
           ByRef xpo As Double, _
           ByRef xpn As Double, _
           ByVal eps As Double _
         )
 
-Private Declare Function swe_cotrans_sp_d Lib ".\swedll32.dll" _
-        Alias "_swe_cotrans_sp_d@12" ( _
+Private Declare PtrSafe Function swe_cotrans_sp_d Lib "swedll64.dll" _
+       ( _
           ByRef xpo As Double, _
           ByRef xpn As Double, _
           ByRef eps As Double _
         ) As Long
 
-Private Declare Sub swe_cs2degstr Lib ".\swedll32.dll" _
-        Alias "_swe_cs2degstr@8" ( _
+Private Declare PtrSafe Sub swe_cs2degstr Lib "swedll64.dll" _
+       ( _
           ByVal t As Long, _
           ByVal S As String _
         )
 
-Private Declare Function swe_cs2degstr_d Lib ".\swedll32.dll" _
-        Alias "_swe_cs2degstr_d@8" ( _
+Private Declare PtrSafe Function swe_cs2degstr_d Lib "swedll64.dll" _
+       ( _
           ByVal t As Long, _
           ByVal S As String _
         ) As Long
 
-Private Declare Sub swe_cs2lonlatstr Lib ".\swedll32.dll" _
-        Alias "_swe_cs2lonlatstr@16" ( _
+Private Declare PtrSafe Sub swe_cs2lonlatstr Lib "swedll64.dll" _
+       ( _
           ByVal t As Long, _
           ByVal pchar As Byte, _
           ByVal mchar As Byte, _
           ByVal S As String _
         )
 
-Private Declare Function swe_cs2lonlatstr_d Lib ".\swedll32.dll" _
-        Alias "_swe_cs2lonlatstr_d@16" ( _
+Private Declare PtrSafe Function swe_cs2lonlatstr_d Lib "swedll64.dll" _
+       ( _
           ByVal t As Long, _
           ByRef pchar As Byte, _
           ByRef mchar As Byte, _
           ByVal S As String _
         ) As Long
 
-Private Declare Sub swe_cs2timestr Lib ".\swedll32.dll" _
-        Alias "_swe_cs2timestr@16" ( _
+Private Declare PtrSafe Sub swe_cs2timestr Lib "swedll64.dll" _
+       ( _
           ByVal t As Long, _
           ByVal sep As Long, _
           ByVal supzero As Long, _
           ByVal S As String _
         )
 
-Private Declare Function swe_cs2timestr_d Lib ".\swedll32.dll" _
-        Alias "_swe_cs2timestr_d@16" ( _
+Private Declare PtrSafe Function swe_cs2timestr_d Lib "swedll64.dll" _
+       ( _
           ByVal t As Long, _
           ByVal sep As Long, _
           ByVal supzero As Long, _
           ByVal S As String _
         ) As Long
 
-Private Declare Function swe_csnorm Lib ".\swedll32.dll" _
-        Alias "_swe_csnorm@4" ( _
+Private Declare PtrSafe Function swe_csnorm Lib "swedll64.dll" _
+       ( _
           ByVal P As Long _
         ) As Long
 
-Private Declare Function swe_csnorm_d Lib ".\swedll32.dll" _
-        Alias "_swe_csnorm_d@4" ( _
+Private Declare PtrSafe Function swe_csnorm_d Lib "swedll64.dll" _
+       ( _
           ByVal P As Long _
         ) As Long
 
-Private Declare Function swe_csroundsec Lib ".\swedll32.dll" _
-        Alias "_swe_csroundsec@4" ( _
+Private Declare PtrSafe Function swe_csroundsec Lib "swedll64.dll" _
+       ( _
           ByVal P As Long _
         ) As Long
 
-Private Declare Function swe_csroundsec_d Lib ".\swedll32.dll" _
-        Alias "_swe_csroundsec_d@4" ( _
+Private Declare PtrSafe Function swe_csroundsec_d Lib "swedll64.dll" _
+       ( _
           ByVal P As Long _
         ) As Long
 
-Private Declare Function swe_d2l Lib ".\swedll32.dll" _
-        Alias "_swe_d2l@8" ( _
+Private Declare PtrSafe Function swe_d2l Lib "swedll64.dll" _
+       ( _
         ) As Long
 
-Private Declare Function swe_d2l_d Lib ".\swedll32.dll" _
-        Alias "_swe_d2l_d@4" ( _
+Private Declare PtrSafe Function swe_d2l_d Lib "swedll64.dll" _
+       ( _
         ) As Long
 
-Private Declare Function swe_date_conversion Lib ".\swedll32.dll" _
-        Alias "_swe_date_conversion@28" ( _
+Private Declare PtrSafe Function swe_date_conversion Lib "swedll64.dll" _
+       ( _
           ByVal Year As Long, _
           ByVal Month As Long, _
           ByVal Day As Long, _
@@ -190,8 +190,8 @@ Private Declare Function swe_date_conversion Lib ".\swedll32.dll" _
           ByRef tjd As Double _
         ) As Long
 
-Private Declare Function swe_date_conversion_d Lib ".\swedll32.dll" _
-        Alias "_swe_date_conversion_d@24" ( _
+Private Declare PtrSafe Function swe_date_conversion_d Lib "swedll64.dll" _
+       ( _
           ByVal Year As Long, _
           ByVal Month As Long, _
           ByVal Day As Long, _
@@ -200,89 +200,89 @@ Private Declare Function swe_date_conversion_d Lib ".\swedll32.dll" _
           ByRef tjd As Double _
         ) As Long
 
-Private Declare Function swe_day_of_week Lib ".\swedll32.dll" _
-        Alias "_swe_day_of_week@8" ( _
+Private Declare PtrSafe Function swe_day_of_week Lib "swedll64.dll" _
+       ( _
           ByVal JD As Double _
         ) As Long
 
-Private Declare Function swe_day_of_week_d Lib ".\swedll32.dll" _
-        Alias "_swe_day_of_week_d@4" ( _
+Private Declare PtrSafe Function swe_day_of_week_d Lib "swedll64.dll" _
+       ( _
           ByRef JD As Double _
         ) As Long
 
-Private Declare Function swe_degnorm Lib ".\swedll32.dll" _
-        Alias "_swe_degnorm@8" ( _
+Private Declare PtrSafe Function swe_degnorm Lib "swedll64.dll" _
+       ( _
           ByVal JD As Double _
         ) As Double
 
-Private Declare Function swe_degnorm_d Lib ".\swedll32.dll" _
-        Alias "_swe_degnorm_d@4" ( _
+Private Declare PtrSafe Function swe_degnorm_d Lib "swedll64.dll" _
+       ( _
           ByRef JD As Double _
         ) As Long
 
-Private Declare Function swe_deltat Lib ".\swedll32.dll" _
-        Alias "_swe_deltat@8" ( _
+Private Declare PtrSafe Function swe_deltat Lib "swedll64.dll" _
+       ( _
           ByVal JD As Double _
         ) As Double
 
-Private Declare Function swe_deltat_d Lib ".\swedll32.dll" _
-        Alias "_swe_deltat_d@8" ( _
+Private Declare PtrSafe Function swe_deltat_d Lib "swedll64.dll" _
+       ( _
           ByRef JD As Double, _
           ByRef deltat As Double _
         ) As Long
 
-Private Declare Function swe_difcs2n Lib ".\swedll32.dll" _
-        Alias "_swe_difcs2n@8" ( _
+Private Declare PtrSafe Function swe_difcs2n Lib "swedll64.dll" _
+       ( _
           ByVal p1 As Long, _
           ByVal p2 As Long _
         ) As Long
 
-Private Declare Function swe_difcs2n_d Lib ".\swedll32.dll" _
-        Alias "_swe_difcs2n_d@8" ( _
+Private Declare PtrSafe Function swe_difcs2n_d Lib "swedll64.dll" _
+       ( _
           ByVal p1 As Long, _
           ByVal p2 As Long _
         ) As Long
 
-Private Declare Function swe_difcsn Lib ".\swedll32.dll" _
-        Alias "_swe_difcsn@8" ( _
+Private Declare PtrSafe Function swe_difcsn Lib "swedll64.dll" _
+       ( _
           ByVal p1 As Long, _
           ByVal p2 As Long _
         ) As Long
 
-Private Declare Function swe_difcsn_d Lib ".\swedll32.dll" _
-        Alias "_swe_difcsn_d@8" ( _
+Private Declare PtrSafe Function swe_difcsn_d Lib "swedll64.dll" _
+       ( _
           ByVal p1 As Long, _
           ByVal p2 As Long _
         ) As Long
 
-Private Declare Function swe_difdeg2n Lib ".\swedll32.dll" _
-        Alias "_swe_difdeg2n@16" ( _
+Private Declare PtrSafe Function swe_difdeg2n Lib "swedll64.dll" _
+       ( _
           ByVal p1 As Double, _
           ByVal p2 As Double _
         ) As Double
 
-Private Declare Function swe_difdeg2n_d Lib ".\swedll32.dll" _
-        Alias "_swe_difdeg2n_d@12" ( _
+Private Declare PtrSafe Function swe_difdeg2n_d Lib "swedll64.dll" _
+       ( _
           ByRef p1 As Double, _
           ByRef p2 As Double, _
           ByRef Diff As Double _
         ) As Long
 
-Private Declare Function swe_difdegn Lib ".\swedll32.dll" _
-        Alias "_swe_difdegn@16" ( _
+Private Declare PtrSafe Function swe_difdegn Lib "swedll64.dll" _
+       ( _
           ByVal p1 As Double, _
           ByVal p2 As Double _
         ) As Long
 
-Private Declare Function swe_difdegn_d Lib ".\swedll32.dll" _
-        Alias "_swe_difdegn_d@12" ( _
+Private Declare PtrSafe Function swe_difdegn_d Lib "swedll64.dll" _
+       ( _
           ByRef p1 As Double, _
           ByRef p2 As Double, _
           ByRef Diff As Double _
         ) As Long
 
-Private Declare Function swe_fixstar Lib ".\swedll32.dll" _
-        Alias "_swe_fixstar@24" ( _
+Private Declare PtrSafe Function swe_fixstar Lib "swedll64.dll" _
+       ( _
           ByVal star As String, _
           ByVal tjd As Double, _
           ByVal iflag As Long, _
@@ -292,8 +292,8 @@ Private Declare Function swe_fixstar Lib ".\swedll32.dll" _
                         ' serr must be able to hold 256 bytes
                         ' star must be able to hold 40 bytes
 
-Private Declare Function swe_fixstar_d Lib ".\swedll32.dll" _
-        Alias "_swe_fixstar_d@20" ( _
+Private Declare PtrSafe Function swe_fixstar_d Lib "swedll64.dll" _
+       ( _
           ByVal star As String, _
           ByRef tjd As Double, _
           ByVal iflag As Long, _
@@ -303,8 +303,8 @@ Private Declare Function swe_fixstar_d Lib ".\swedll32.dll" _
                         ' serr must be able to hold 256 bytes
                         ' star must be able to hold 40 bytes
 
-Private Declare Function swe_fixstar_ut Lib ".\swedll32.dll" _
-        Alias "_swe_fixstar_ut@24" ( _
+Private Declare PtrSafe Function swe_fixstar_ut Lib "swedll64.dll" _
+       ( _
           ByVal star As String, _
           ByVal tjd_ut As Double, _
           ByVal iflag As Long, _
@@ -314,8 +314,8 @@ Private Declare Function swe_fixstar_ut Lib ".\swedll32.dll" _
                         ' serr must be able to hold 256 bytes
                         ' star must be able to hold 40 bytes
 
-Private Declare Function swe_fixstar_ut_d Lib ".\swedll32.dll" _
-        Alias "_swe_fixstar_ut_d@20" ( _
+Private Declare PtrSafe Function swe_fixstar_ut_d Lib "swedll64.dll" _
+       ( _
           ByVal star As String, _
           ByRef tjd_ut As Double, _
           ByVal iflag As Long, _
@@ -325,51 +325,51 @@ Private Declare Function swe_fixstar_ut_d Lib ".\swedll32.dll" _
                         ' serr must be able to hold 256 bytes
                         ' star must be able to hold 40 bytes
 
-Private Declare Function swe_get_ayanamsa Lib ".\swedll32.dll" _
-        Alias "_swe_get_ayanamsa@8" ( _
+Private Declare PtrSafe Function swe_get_ayanamsa Lib "swedll64.dll" _
+       ( _
           ByVal tjd_et As Double _
         ) As Double
 
-Private Declare Function swe_get_ayanamsa_d Lib ".\swedll32.dll" _
-        Alias "_swe_get_ayanamsa_d@8" ( _
+Private Declare PtrSafe Function swe_get_ayanamsa_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_et As Double, _
           ByRef ayan As Double _
         ) As Long
 
-Private Declare Function swe_get_ayanamsa_ut Lib ".\swedll32.dll" _
-        Alias "_swe_get_ayanamsa_ut@8" ( _
+Private Declare PtrSafe Function swe_get_ayanamsa_ut Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double _
         ) As Double
 
-Private Declare Function swe_get_ayanamsa_ut_d Lib ".\swedll32.dll" _
-        Alias "_swe_get_ayanamsa_ut_d@8" ( _
+Private Declare PtrSafe Function swe_get_ayanamsa_ut_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByRef ayan As Double _
         ) As Long
 
-Private Declare Sub swe_get_planet_name Lib ".\swedll32.dll" _
-        Alias "_swe_get_planet_name@8" ( _
+Private Declare PtrSafe Sub swe_get_planet_name Lib "swedll64.dll" _
+       ( _
           ByVal ipl As Long, _
           ByVal pname As String _
         )
 
-Private Declare Function swe_get_planet_name_d Lib ".\swedll32.dll" _
-        Alias "_swe_get_planet_name_d@8" ( _
+Private Declare PtrSafe Function swe_get_planet_name_d Lib "swedll64.dll" _
+       ( _
           ByVal ipl As Long, _
           ByVal pname As String _
         ) As Long
 
-Private Declare Function swe_get_tid_acc Lib ".\swedll32.dll" _
-        Alias "_swe_get_tid_acc@0" ( _
+Private Declare PtrSafe Function swe_get_tid_acc Lib "swedll64.dll" _
+       ( _
         ) As Double
 
-Private Declare Function swe_get_tid_acc_d Lib ".\swedll32.dll" _
-        Alias "_swe_get_tid_acc_d@4" ( _
+Private Declare PtrSafe Function swe_get_tid_acc_d Lib "swedll64.dll" _
+       ( _
           ByRef X As Double _
         ) As Long
 
-Private Declare Function swe_houses Lib ".\swedll32.dll" _
-        Alias "_swe_houses@36" ( _
+Private Declare PtrSafe Function swe_houses Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal geolat As Double, _
           ByVal geolon As Double, _
@@ -379,8 +379,8 @@ Private Declare Function swe_houses Lib ".\swedll32.dll" _
         ) As Long       ' hcusps must be first of 13 array elements
                         ' ascmc must be first of 10 array elements
 
-Private Declare Function swe_houses_d Lib ".\swedll32.dll" _
-        Alias "_swe_houses_d@24" ( _
+Private Declare PtrSafe Function swe_houses_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByRef geolat As Double, _
           ByRef geolon As Double, _
@@ -390,8 +390,8 @@ Private Declare Function swe_houses_d Lib ".\swedll32.dll" _
         ) As Long       ' hcusps must be first of 13 array elements
                         ' ascmc must be first of 10 array elements
 
-Private Declare Function swe_houses_ex Lib ".\swedll32.dll" _
-        Alias "_swe_houses_ex@40" ( _
+Private Declare PtrSafe Function swe_houses_ex Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal iflag As Long, _
           ByVal geolat As Double, _
@@ -402,8 +402,8 @@ Private Declare Function swe_houses_ex Lib ".\swedll32.dll" _
         ) As Long       ' hcusps must be first of 13 array elements
                         ' ascmc must be first of 10 array elements
 
-Private Declare Function swe_houses_ex_d Lib ".\swedll32.dll" _
-        Alias "_swe_houses_ex_d@28" ( _
+Private Declare PtrSafe Function swe_houses_ex_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByVal iflag As Long, _
           ByRef geolat As Double, _
@@ -414,8 +414,8 @@ Private Declare Function swe_houses_ex_d Lib ".\swedll32.dll" _
         ) As Long       ' hcusps must be first of 13 array elements
                         ' ascmc must be first of 10 array elements
 
-Private Declare Function swe_houses_armc Lib ".\swedll32.dll" _
-        Alias "_swe_houses_armc@36" ( _
+Private Declare PtrSafe Function swe_houses_armc Lib "swedll64.dll" _
+       ( _
           ByVal armc As Double, _
           ByVal geolat As Double, _
           ByVal eps As Double, _
@@ -425,8 +425,8 @@ Private Declare Function swe_houses_armc Lib ".\swedll32.dll" _
         ) As Long       ' hcusps must be first of 13 array elements
                         ' ascmc must be first of 10 array elements
 
-Private Declare Function swe_houses_armc_d Lib ".\swedll32.dll" _
-        Alias "_swe_houses_armc_d@24" ( _
+Private Declare PtrSafe Function swe_houses_armc_d Lib "swedll64.dll" _
+       ( _
           ByRef armc As Double, _
           ByRef geolat As Double, _
           ByRef eps As Double, _
@@ -436,8 +436,8 @@ Private Declare Function swe_houses_armc_d Lib ".\swedll32.dll" _
         ) As Long       ' hcusps must be first of 13 array elements
                         ' ascmc must be first of 10 array elements
 
-Private Declare Function swe_house_pos Lib ".\swedll32.dll" _
-        Alias "_swe_house_pos@36" ( _
+Private Declare PtrSafe Function swe_house_pos Lib "swedll64.dll" _
+       ( _
           ByVal armc As Double, _
           ByVal geolat As Double, _
           ByVal eps As Double, _
@@ -447,8 +447,8 @@ Private Declare Function swe_house_pos Lib ".\swedll32.dll" _
         ) As Double
                         ' xpin must be first of 2 array elements
 
-Private Declare Function swe_house_pos_d Lib ".\swedll32.dll" _
-        Alias "_swe_house_pos_d@28" ( _
+Private Declare PtrSafe Function swe_house_pos_d Lib "swedll64.dll" _
+       ( _
           ByRef armc As Double, _
           ByRef geolat As Double, _
           ByRef eps As Double, _
@@ -459,8 +459,8 @@ Private Declare Function swe_house_pos_d Lib ".\swedll32.dll" _
         ) As Long
                         ' xpin must be first of 2 array elements
 
-Private Declare Function swe_julday Lib ".\swedll32.dll" _
-        Alias "_swe_julday@24" ( _
+Private Declare PtrSafe Function swe_julday Lib "swedll64.dll" _
+       ( _
           ByVal Year As Long, _
           ByVal Month As Long, _
           ByVal Day As Long, _
@@ -468,8 +468,8 @@ Private Declare Function swe_julday Lib ".\swedll32.dll" _
           ByVal gregflg As Long _
         ) As Double
 
-Private Declare Function swe_julday_d Lib ".\swedll32.dll" _
-        Alias "_swe_julday_d@24" ( _
+Private Declare PtrSafe Function swe_julday_d Lib "swedll64.dll" _
+       ( _
           ByVal Year As Long, _
           ByVal Month As Long, _
           ByVal Day As Long, _
@@ -478,8 +478,8 @@ Private Declare Function swe_julday_d Lib ".\swedll32.dll" _
           ByRef tjd As Double _
         ) As Long
 
-Private Declare Function swe_lun_eclipse_how Lib ".\swedll32.dll" _
-        Alias "_swe_lun_eclipse_how@24" ( _
+Private Declare PtrSafe Function swe_lun_eclipse_how Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal ifl As Long, _
           ByRef geopos As Double, _
@@ -487,8 +487,8 @@ Private Declare Function swe_lun_eclipse_how Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_lun_eclipse_how_d Lib ".\swedll32.dll" _
-        Alias "_swe_lun_eclipse_how_d@20" ( _
+Private Declare PtrSafe Function swe_lun_eclipse_how_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByVal ifl As Long, _
           ByRef geopos As Double, _
@@ -496,8 +496,8 @@ Private Declare Function swe_lun_eclipse_how_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_lun_eclipse_when Lib ".\swedll32.dll" _
-        Alias "_swe_lun_eclipse_when@28" ( _
+Private Declare PtrSafe Function swe_lun_eclipse_when Lib "swedll64.dll" _
+       ( _
           ByVal tjd_start As Double, _
           ByVal ifl As Long, _
           ByVal ifltype As Long, _
@@ -506,8 +506,8 @@ Private Declare Function swe_lun_eclipse_when Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_lun_eclipse_when_d Lib ".\swedll32.dll" _
-        Alias "_swe_lun_eclipse_when_d@24" ( _
+Private Declare PtrSafe Function swe_lun_eclipse_when_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_start As Double, _
           ByVal ifl As Long, _
           ByVal ifltype As Long, _
@@ -516,8 +516,8 @@ Private Declare Function swe_lun_eclipse_when_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_nod_aps Lib ".\swedll32.dll" _
-        Alias "_swe_nod_aps@40" ( _
+Private Declare PtrSafe Function swe_nod_aps Lib "swedll64.dll" _
+       ( _
           ByVal tjd_et As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -529,8 +529,8 @@ Private Declare Function swe_nod_aps Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_nod_aps_ut Lib ".\swedll32.dll" _
-        Alias "_swe_nod_aps_ut@40" ( _
+Private Declare PtrSafe Function swe_nod_aps_ut Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -542,8 +542,8 @@ Private Declare Function swe_nod_aps_ut Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_pheno Lib ".\swedll32.dll" _
-        Alias "_swe_pheno@24" ( _
+Private Declare PtrSafe Function swe_pheno Lib "swedll64.dll" _
+       ( _
           ByVal tjd As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -551,8 +551,8 @@ Private Declare Function swe_pheno Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_pheno_ut Lib ".\swedll32.dll" _
-        Alias "_swe_pheno_ut@24" ( _
+Private Declare PtrSafe Function swe_pheno_ut Lib "swedll64.dll" _
+       ( _
           ByVal tjd As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -560,8 +560,8 @@ Private Declare Function swe_pheno_ut Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_pheno_d Lib ".\swedll32.dll" _
-        Alias "_swe_pheno_d@20" ( _
+Private Declare PtrSafe Function swe_pheno_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -569,8 +569,8 @@ Private Declare Function swe_pheno_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_pheno_ut_d Lib ".\swedll32.dll" _
-        Alias "_swe_pheno_ut_d@20" ( _
+Private Declare PtrSafe Function swe_pheno_ut_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd As Double, _
           ByVal ipl As Long, _
           ByVal iflag As Long, _
@@ -578,16 +578,16 @@ Private Declare Function swe_pheno_ut_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_refrac Lib ".\swedll32.dll" _
-        Alias "_swe_refrac@28" ( _
+Private Declare PtrSafe Function swe_refrac Lib "swedll64.dll" _
+       ( _
           ByVal inalt As Double, _
           ByVal atpress As Double, _
           ByVal attemp As Double, _
           ByVal calc_flag As Long _
         ) As Double
 
-Private Declare Sub swe_revjul Lib ".\swedll32.dll" _
-        Alias "_swe_revjul@28" ( _
+Private Declare PtrSafe Sub swe_revjul Lib "swedll64.dll" _
+       ( _
           ByVal tjd As Double, _
           ByVal gregflg As Long, _
           ByRef Year As Long, _
@@ -596,8 +596,8 @@ Private Declare Sub swe_revjul Lib ".\swedll32.dll" _
           ByRef hour As Double _
         )
 
-Private Declare Function swe_revjul_d Lib ".\swedll32.dll" _
-        Alias "_swe_revjul_d@24" ( _
+Private Declare PtrSafe Function swe_revjul_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd As Double, _
           ByVal gregflg As Long, _
           ByRef Year As Long, _
@@ -606,8 +606,8 @@ Private Declare Function swe_revjul_d Lib ".\swedll32.dll" _
           ByRef hour As Double _
         ) As Long
 
-Private Declare Function swe_rise_trans Lib ".\swedll32.dll" _
-        Alias "_swe_rise_trans@52" ( _
+Private Declare PtrSafe Function swe_rise_trans Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal ipl As Long, _
           ByVal starname As String, _
@@ -620,92 +620,92 @@ Private Declare Function swe_rise_trans Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Sub swe_set_ephe_path Lib ".\swedll32.dll" _
-        Alias "_swe_set_ephe_path@4" ( _
+Private Declare PtrSafe Sub swe_set_ephe_path Lib "swedll64.dll" _
+       ( _
           ByVal path As String _
         )
 
-Private Declare Function swe_set_ephe_path_d Lib ".\swedll32.dll" _
-        Alias "_swe_set_ephe_path_d@4" ( _
+Private Declare PtrSafe Function swe_set_ephe_path_d Lib "swedll64.dll" _
+       ( _
           ByVal path As String _
         ) As Long
 
-Private Declare Sub swe_set_jpl_file Lib ".\swedll32.dll" _
-        Alias "_swe_set_jpl_file@4" ( _
+Private Declare PtrSafe Sub swe_set_jpl_file Lib "swedll64.dll" _
+       ( _
           ByVal file As String _
         )
 
-Private Declare Function swe_set_jpl_file_d Lib ".\swedll32.dll" _
-        Alias "_swe_set_jpl_file_d@4" ( _
+Private Declare PtrSafe Function swe_set_jpl_file_d Lib "swedll64.dll" _
+       ( _
           ByVal file As String _
         ) As Long
 
-Private Declare Function swe_set_sid_mode Lib ".\swedll32.dll" _
-        Alias "_swe_set_sid_mode@20" ( _
+Private Declare PtrSafe Function swe_set_sid_mode Lib "swedll64.dll" _
+       ( _
           ByVal sid_mode As Long, _
           ByVal t0 As Double, _
           ByVal ayan_t0 As Double _
         ) As Long
 
-Private Declare Function swe_set_sid_mode_d Lib ".\swedll32.dll" _
-        Alias "_swe_sid_mode_d@12" ( _
+Private Declare PtrSafe Function swe_set_sid_mode_d Lib "swedll64.dll" _
+       ( _
           ByVal sid_mode As Long, _
           ByRef t0 As Double, _
           ByRef ayan_t0 As Double _
         ) As Long
 
-Private Declare Function swe_set_topo Lib ".\swedll32.dll" _
-        Alias "_swe_set_topo@24" ( _
+Private Declare PtrSafe Function swe_set_topo Lib "swedll64.dll" _
+       ( _
           ByVal geolon As Double, _
           ByVal geolat As Double, _
           ByVal altitude As Double _
         )
 
-Private Declare Function swe_set_topo_d Lib ".\swedll32.dll" _
-        Alias "_swe_set_topo_d@12" ( _
+Private Declare PtrSafe Function swe_set_topo_d Lib "swedll64.dll" _
+       ( _
           ByRef geolon As Double, _
           ByRef geolat As Double, _
           ByRef altitude As Double _
         )
 
-Private Declare Sub swe_set_tid_acc Lib ".\swedll32.dll" _
-        Alias "_swe_set_tid_acc@8" ( _
+Private Declare PtrSafe Sub swe_set_tid_acc Lib "swedll64.dll" _
+       ( _
           ByVal X As Double _
         )
 
-Private Declare Function swe_set_tid_acc_d Lib ".\swedll32.dll" _
-        Alias "_swe_set_tid_acc_d@4" ( _
+Private Declare PtrSafe Function swe_set_tid_acc_d Lib "swedll64.dll" _
+       ( _
           ByRef X As Double _
         ) As Long
 
-Private Declare Function swe_sidtime0 Lib ".\swedll32.dll" _
-        Alias "_swe_sidtime0@24" ( _
+Private Declare PtrSafe Function swe_sidtime0 Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal ecl As Double, _
           ByVal nut As Double _
         ) As Double
 
-Private Declare Function swe_sidtime0_d Lib ".\swedll32.dll" _
-        Alias "_swe_sidtime0_d@16" ( _
+Private Declare PtrSafe Function swe_sidtime0_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByRef ecl As Double, _
           ByRef nut As Double, _
           ByRef sidt As Double _
         ) As Long
 
-Private Declare Function swe_sidtime Lib ".\swedll32.dll" _
-        Alias "_swe_sidtime@8" ( _
+Private Declare PtrSafe Function swe_sidtime Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double _
         ) As Double
 
-Private Declare Function swe_sidtime_d Lib ".\swedll32.dll" _
-        Alias "_swe_sidtime_d@8" ( _
+Private Declare PtrSafe Function swe_sidtime_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByRef sidt As Double _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_how Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_how@24" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_how Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal ifl As Long, _
           ByRef geopos As Double, _
@@ -713,8 +713,8 @@ Private Declare Function swe_sol_eclipse_how Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_how_d Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_how_d@20" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_how_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByVal ifl As Long, _
           ByRef geopos As Double, _
@@ -722,8 +722,8 @@ Private Declare Function swe_sol_eclipse_how_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_when_glob Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_when_glob@28" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_when_glob Lib "swedll64.dll" _
+       ( _
           ByVal tjd_start As Double, _
           ByVal ifl As Long, _
           ByVal ifltype As Long, _
@@ -732,8 +732,8 @@ Private Declare Function swe_sol_eclipse_when_glob Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_when_glob_d Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_when_glob_d@24" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_when_glob_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_start As Double, _
           ByVal ifl As Long, _
           ByVal ifltype As Long, _
@@ -742,8 +742,8 @@ Private Declare Function swe_sol_eclipse_when_glob_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_when_loc Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_when_loc@32" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_when_loc Lib "swedll64.dll" _
+       ( _
           ByVal tjd_start As Double, _
           ByVal ifl As Long, _
           ByRef tret As Double, _
@@ -752,8 +752,8 @@ Private Declare Function swe_sol_eclipse_when_loc Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_when_loc_d Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_when_loc_d@28" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_when_loc_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_start As Double, _
           ByVal ifl As Long, _
           ByRef tret As Double, _
@@ -762,8 +762,8 @@ Private Declare Function swe_sol_eclipse_when_loc_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_where Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_where@24" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_where Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByVal ifl As Long, _
           ByRef geopos As Double, _
@@ -771,8 +771,8 @@ Private Declare Function swe_sol_eclipse_where Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_sol_eclipse_where_d Lib ".\swedll32.dll" _
-        Alias "_swe_sol_eclipse_where_d@20" ( _
+Private Declare PtrSafe Function swe_sol_eclipse_where_d Lib "swedll64.dll" _
+       ( _
           ByRef tjd_ut As Double, _
           ByVal ifl As Long, _
           ByRef geopos As Double, _
@@ -780,8 +780,8 @@ Private Declare Function swe_sol_eclipse_where_d Lib ".\swedll32.dll" _
           ByVal serr As String _
         ) As Long
 
-Private Declare Function swe_time_equ Lib ".\swedll32.dll" _
-        Alias "_swe_time_equ@16" ( _
+Private Declare PtrSafe Function swe_time_equ Lib "swedll64.dll" _
+       ( _
           ByVal tjd_ut As Double, _
           ByRef E As Double, _
           ByRef serr As String _
@@ -2196,4 +2196,6 @@ Sub EditThis()
 '
 '
 End Sub
+
+
 
