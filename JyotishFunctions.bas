@@ -948,7 +948,7 @@ Const SE_APP_TO_TRUE        As Long = 1
    Lon As Double, _
    B As Double, _
    riseset As Long, _
-   Planet As Long) _
+   planet As Long) _
 As Double
 
 Dim Jul_day_UT As Double, tret(10) As Double
@@ -957,12 +957,12 @@ geopos(0) = Lon
 geopos(1) = lat
 geopos(2) = 0
     Jul_day_UT = B + 2415017.5
-    ret_flag = swe_rise_trans(Jul_day_UT, Planet, "", 2, riseset, geopos(0), 1013.25, 10, tret(0), serr)
+    ret_flag = swe_rise_trans(Jul_day_UT, planet, "", 2, riseset, geopos(0), 1013.25, 10, tret(0), serr)
     h = tret(0) - 2415018.5
     risesetplanet = h
 End Function
  
-   Public Function Planet( _
+   Public Function planet( _
    DateTime As Double, _
    PlanetID As Long) _
 As Double
@@ -974,7 +974,7 @@ Dim i As Long, serr As String
 Jul_day_UT = DateTime + 2415018.5
    i = swe_set_sid_mode(SE_SIDM_LAHIRI, 0, 0)
    i = swe_calc_ut(Jul_day_UT, PlanetID, SEFLG_SIDEREAL, X(0), serr)
-Planet = X(0)
+planet = X(0)
 
 End Function
 Public Function Asdt( _
@@ -1127,6 +1127,35 @@ N = Application.WorksheetFunction.RoundUp(PlanetLongitude / 13.33, 0)
 NaksLord = A(N - 1)
 
 End Function
+
+Public Function PlanetRiseSet( _
+   Latitude As Double, _
+   Longitude As Double, _
+   DateTime As Double, _
+   planet As Double, _
+   riseset As Double _
+   ) _
+As Double
+
+Dim Jul_day_UT As Double, tret(10) As Double
+Dim ret_flag As Double, geopos(3) As Double, serr As String
+geopos(0) = Longitude
+geopos(1) = Latitude
+geopos(2) = 0
+
+On Error GoTo error_msg
+
+    Jul_day_UT = DateTime + 2415017.5
+    ret_flag = swe_rise_trans(Jul_day_UT, planet, "", 2, riseset, geopos(0), 1013.25, 10, tret(0), serr)
+    h = tret(0) - 2415018.5
+    PlanetRiseSet = h
+Exit Function
+error_msg:
+    
+     Application.StatusBar = Err & ": " & Error(Err)
+
+End Function
+
 
 Public Function Sunrise( _
    Latitude As Double, _
@@ -2074,7 +2103,7 @@ Const Ketu = 0.055
 
 Dim Longt, Diff, Days As Double
 
-Longt = Planet(DateTime, PlanetID)
+Longt = planet(DateTime, PlanetID)
 
 Do Until Longt = Degree
     If Degree < Longt Then
@@ -2085,7 +2114,7 @@ Do Until Longt = Degree
 
 DateTime = DateTime + 0.8 * Diff
 
-Longt = Planet(DateTime, PlanetID)
+Longt = planet(DateTime, PlanetID)
 Loop
 
 PlanetTransit = CDate(DateTime)
@@ -2124,7 +2153,7 @@ P(10) = "Rahu"
 
 For PlanetID = 0 To 10
   
-R = RasiNum(DivPlanetLongitude(Planet(DT, PlanetID), Division, Var))
+R = RasiNum(DivPlanetLongitude(planet(DT, PlanetID), Division, Var))
 
 If R = Rasi Then
 Z = Z & " " & P(PlanetID)
@@ -2137,7 +2166,7 @@ If R = Rasi Then
 Z = Z & " " & "Asdt"
 End If
 
-R = RasiNum(DivPlanetLongitude(DegRnd(Planet(DT, 10) + 180), Division, Var))
+R = RasiNum(DivPlanetLongitude(DegRnd(planet(DT, 10) + 180), Division, Var))
 If R = Rasi Then
 Z = Z & " " & "Ketu"
 End If
@@ -2196,6 +2225,8 @@ Sub EditThis()
 '
 '
 End Sub
+
+
 
 
 
