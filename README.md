@@ -1,9 +1,9 @@
 # Excel jyotish solutions. #
 Many Jyotisha Ganita calculations are easy to try in excel. These solutions may not be available on many jyotish softwares. The Jyotisha can themselves try to do their own calculations using the sheets in this repository.
 
-**All the XL files use SWEDLL64.DLL, A Windows Library containing the swiss ephemeris functions.**
+**All the XL files use SWEDLL64.DLL, A Windows Library containing the swiss ephemeris functions. Keep the File in your _Documents_ Folder or anywhere in PATH **
 
-Ideally I will like to move away from proriety microsoft XL to Open Documents formats, but for now it's in XL as I need to work on alternative to SWEDLL64.DLL 
+Ideally I will like to move away from proprietary microsoft XL to Open Documents formats, but for now it's in XL as I need to work on alternative to SWEDLL64.DLL 
 
 This repository containts
 ## Jyotish Calc 64 Bit Ver 3.0.xlsm ##
