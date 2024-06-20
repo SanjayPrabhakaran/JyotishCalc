@@ -15,6 +15,6 @@ Graha positions from 1970 to 2066 in ODS (Open document spreadsheet). Easy to lo
 ## PanchangaCalendar.xlsm ##
 An Excel sheet to print your monthly calendar. Setup you Latitude, Longitude, Timezone, StartDate in the first sheet.
 
-All Cells Yellow are initial values you need to setup.
+All Cells Yellow are initial values you need to fill up with data.
 
 _by Sanjay Prabhakaran_
